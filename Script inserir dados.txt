@@ -1,0 +1,44 @@
+-- Inserir dados na tabela 'cliente'
+INSERT INTO cliente (id, nome, email)
+VALUES 
+(1, 'João Silva', 'joao.silva@email.com'),
+(2, 'Maria Oliveira', 'maria.oliveira@email.com');
+
+-- Inserir dados na tabela 'produto'
+INSERT INTO produto (id, descricao, preco, quant)
+VALUES 
+(1, 'Produto A', 100.0, 10),
+(2, 'Produto B', 150.0, 20),
+(3, 'Produto C', 200.0, 30);
+
+-- Inserir dados na tabela 'carrinho'
+-- O carrinho é relacionado ao cliente, então o 'cliente_id' precisa ser atribuído corretamente
+INSERT INTO carrinho (id, cliente_id)
+VALUES 
+(1, 1),  -- Carrinho de João Silva
+(2, 2);  -- Carrinho de Maria Oliveira
+
+-- Inserir dados na tabela de relacionamento 'carrinho_produto'
+-- A tabela 'carrinho_produto' mapeia a relação Many-to-Many entre 'carrinho' e 'produto'
+INSERT INTO carrinho_produto (carrinho_id, produto_id)
+VALUES
+(1, 1),  -- Produto A no carrinho de João Silva
+(1, 2),  -- Produto B no carrinho de João Silva
+(2, 2),  -- Produto B no carrinho de Maria Oliveira
+(2, 3);  -- Produto C no carrinho de Maria Oliveira
+
+-- Inserir dados na tabela 'compra'
+-- Uma compra é associada ao cliente e contém um total, além de produtos
+INSERT INTO compra (id, cliente_id, data_compra, total_compra)
+VALUES 
+(1, 1, '2025-03-17', 250.0),  -- Compra de João Silva
+(2, 2, '2025-03-17', 350.0);  -- Compra de Maria Oliveira
+
+-- Inserir dados na tabela de relacionamento 'compra_produto'
+-- A tabela 'compra_produto' mapeia a relação Many-to-Many entre 'compra' e 'produto'
+INSERT INTO compra_produto (compra_id, produto_id)
+VALUES
+(1, 1),  -- Produto A na compra de João Silva
+(1, 2),  -- Produto B na compra de João Silva
+(2, 2),  -- Produto B na compra de Maria Oliveira
+(2, 3);  -- Produto C na compra de Maria Oliveira
