@@ -29,7 +29,7 @@ public class CarrinhoController {
 		
 		carrinhoService.adicionarProduto(produtoId, clienteId);
 		
-		return ResponseEntity.ok("Produto adicionado ao carrinho.");
+		return ResponseEntity.ok("Produto adicionado no carrinho.");
 		
 	}
 	
