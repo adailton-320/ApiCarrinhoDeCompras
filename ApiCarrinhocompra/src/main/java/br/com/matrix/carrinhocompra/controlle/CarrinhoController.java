@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.matrix.carrinhocompra.model.Produto;
 import br.com.matrix.carrinhocompra.service.CarrinhoService;
-import org.springframework.web.bind.annotation.RequestParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-
+@Tag(name = "Carrinho de compras", description = "Endpoints para gereciamento do carrinho de compras")
 @RestController
 @RequestMapping("/carrinho")
 public class CarrinhoController {
@@ -22,6 +23,7 @@ public class CarrinhoController {
 	@Autowired
 	private CarrinhoService carrinhoService;
 	
+	@Operation(summary = "Inseri produto no carrino")
 	@PostMapping("/adicionar/{produtoId}/{clienteId}")
 	public ResponseEntity<String> adicionarProduto(@PathVariable Long produtoId, @PathVariable Long clienteId){
 		
@@ -31,6 +33,7 @@ public class CarrinhoController {
 		
 	}
 	
+	@Operation(summary = "Remove produto do carrino")
 	@PostMapping("/remover/{produtoId}/{clienteId}")
 	public ResponseEntity<String> removerProduto(@PathVariable Long produtoId , @PathVariable Long clienteId){
 		
@@ -40,6 +43,7 @@ public class CarrinhoController {
 		
 	}
 	
+	@Operation(summary = "Calcula os preços do produtos")
 	@GetMapping("/calcularCarrinho/{clienteId}")
 	public ResponseEntity<Double> calcularTotal(@PathVariable Long clienteId){
 		double totalCarrinho= carrinhoService.CalcularCarrinho(clienteId);
@@ -48,6 +52,7 @@ public class CarrinhoController {
 		
 	}
 	
+	@Operation(summary = "Lista os itens do carrinho")
 	@GetMapping("/listarProdutos/{clienteId}")
 	public ResponseEntity<List<Produto>> listarProdutos(@PathVariable Long clienteId){
 		
